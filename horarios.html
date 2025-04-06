@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description"
+        content="Postres artesanales ubicados en la residencial San Felipe en Jesus María - Lima - Perú">
+    <meta name="author" content="Denani Postres Artesanales">
+    <title>Denani Postres Artesanales</title>
+
+    <!-- font icons -->
+    <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
+
+    <link rel="stylesheet" href="assets/vendors/animate/animate.css">
+
+    <!-- Bootstrap + FoodHut main styles -->
+    <link rel="stylesheet" href="assets/css/foodhut.css">
+</head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
+
+    <!-- Navbar -->
+    <nav class="custom-navbar navbar navbar-expand-lg navbar-dark fixed-top" data-spy="affix" data-offset-top="10">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#home">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">Nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#gallary">Galería</a>
+                </li>
+            </ul>
+            <a class="navbar-brand m-auto" href="#">
+                <img src="assets/imgs/denani_logo.jpg" class="brand-img" alt="">
+                <img src="assets/imgs/denani_logo.jpg" class="brand-txt" alt="" style="max-height: 80px;">
+                <!-- <span class="brand-txt">Denani postres artesanales</span> -->
+            </a>
+        </div>
+    </nav>
+    <!-- header -->
+    <header id="home" class="header">
+        <div class="overlay text-white text-center">
+            <h1 class="display-2 font-weight-bold my-3">Horarios</h1>
+
+            <!-- Select de nombres -->
+            <!-- Selector de nombre -->
+            <div class="my-3">
+                <select id="nombreSelect" class="form-select">
+                    <option value="" disabled selected>Selecciona tu nombre</option>
+                    <option>Daniela</option>
+                    <option>Renzo</option>
+                    <option>Maria Elena</option>
+                    <option>Elizabeth</option>
+                    <option>Gavo</option>
+                    <option>Luzmila</option>
+                    <option>Alejandra</option>
+                </select>
+            </div>
+
+            <!-- Botones -->
+            <div class="my-3">
+                <button onclick="marcarHora('entrada')" class="btn btn-success mx-2">Marcar Entrada</button>
+                <button onclick="marcarHora('salida')" class="btn btn-danger mx-2">Marcar Salida</button>
+            </div>
+
+            <!-- Tabla de horarios -->
+            <div class="table-responsive my-4" id="tablaContainer">
+                <table class="table table-bordered table-dark text-white">
+                    <thead>
+                        <tr>
+                            <th>Día</th>
+                            <th>Fecha</th>
+                            <th>Entrada</th>
+                            <th>Salida</th>
+                            <th>Saldo de horas</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaBody">
+                        <tr>
+                            <td>Lunes</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Martes</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Miércoles</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Jueves</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Viernes</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Sábado</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Domingo</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button id="opcionesBtn" class="btn btn-secondary mx-2" onclick="toggleOpciones()"
+                style="display: none;">
+                <i class="ti-more-alt"></i>
+            </button>
+            <div class="tooltip-custom" id="opcionesTooltip" style="display: none;">
+                <button onclick="eliminarDatosIndividual()" class="btn btn-danger mx-2" id="eliminarIndividualBtn">
+                    <i class="ti-trash"></i> Eliminar
+                </button>
+                <button onclick="eliminarDatosGlobal()" class="btn btn-danger mx-2" id="eliminarGlobalBtn">
+                    <i class="ti-trash"></i> Eliminar Todo
+                </button>
+            </div>
+            <div class="my-4 p-3 border border-dark rounded text-center" id="totalCumplimientoContainer"
+                style="display: none;">
+                <h3 id="totalCumplimiento" style="font-size: 1.5em; font-weight: bold;">Total: -</h3>
+            </div>
+            <button id="enviarReporteBtn" onclick="enviarCorreoConHorarios()" class="btn btn-primary mx-2 mt-2 mb-2"
+                style="display: none;">Enviar Reporte</button>
+            <div id="loader" class="spinner-border text-primary mx-2 mt-2 mb-2" role="status" style="display: none;">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="bg-dark text-light text-center border-top wow fadeIn">
+        <p class="mb-0 py-3 text-muted small">Denani Postres Artesanales</p>
+    </div>
+    <!-- end of page footer -->
+
+    <!-- core  -->
+    <script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
+    <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
+
+    <!-- bootstrap affix -->
+    <script src="assets/vendors/bootstrap/bootstrap.affix.js"></script>
+
+    <!-- wow.js -->
+    <script src="assets/vendors/wow/wow.js"></script>
+
+    <!-- FoodHut js -->
+    <script src="assets/js/foodhut.js"></script>
+
+    <!-- Custom js -->
+    <script>
+        const horasRequeridas = {
+            "Elizabeth": 9,
+            "Maria Elena": 9,
+            "Gavo": 8,
+            "Luzmila": 5,
+            "Alejandra": 5
+        };
+
+        function marcarHora(tipo) {
+            const nombre = document.getElementById("nombreSelect").value;
+            if (!nombre) return alert("Selecciona un nombre");
+
+            const dias = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+            const hoy = new Date();
+            const diaNombre = dias[hoy.getDay()];
+            const fecha = hoy.toLocaleDateString();
+            const horaActual = String(hoy.getHours()).padStart(2, '0') + ":" + String(hoy.getMinutes()).padStart(2, '0');
+
+            const tabla = document.getElementById("tablaBody");
+            if (!tabla) return;
+            const tablaContainer = document.getElementById("tablaContainer");
+            const enviarReporteBtn = document.getElementById("enviarReporteBtn");
+            const eliminarIndividualBtn = document.getElementById("eliminarIndividualBtn");
+            const eliminarGlobalBtn = document.getElementById("eliminarGlobalBtn");
+            const opcionesBtn = document.getElementById("opcionesBtn");
+
+            for (let fila of tabla.rows) {
+                if (fila.cells[0].textContent === diaNombre) {
+                    fila.cells[1].textContent = fecha;
+                    const horaIdx = tipo === "entrada" ? 2 : 3;
+                    fila.cells[horaIdx].textContent = horaActual;
+
+                    // Verifica si la tabla está visible y si tanto la entrada como la salida están marcadas
+                    if (["Daniela", "Renzo"].includes(nombre)) {
+                        fila.cells[4].textContent = "-";
+                    } else if (tablaContainer.style.display === 'block' && fila.cells[2].textContent !== "-" && fila.cells[3].textContent !== "-") {
+                        const entrada = fila.cells[2].textContent;
+                        const salida = fila.cells[3].textContent;
+
+                        const [h1, m1] = entrada.split(":").map(Number);
+                        const [h2, m2] = salida.split(":").map(Number);
+
+                        // Verificación de formato de hora para entrada y salida
+                        if (isNaN(h1) || isNaN(m1) || isNaN(h2) || isNaN(m2)) {
+                            return alert("Error en el formato de la hora. Asegúrate de que la entrada y salida estén en formato HH:MM.");
+                        }
+
+                        // Calcular los minutos trabajados
+                        const minutosTrabajados = (h2 * 60 + m2) - (h1 * 60 + m1);
+                        if (minutosTrabajados < 0) {
+                            return alert("La hora de salida no puede ser anterior a la de entrada.");
+                        }
+
+                        const horasTrabajadas = (minutosTrabajados / 60).toFixed(2);
+                        const requerido = horasRequeridas[nombre] ?? 0;
+
+                        const diferencia = (horasTrabajadas - requerido);
+                        const horas = Math.floor(Math.abs(diferencia));
+                        const minutos = Math.floor((Math.abs(diferencia) * 60) % 60);
+                        const sign = diferencia >= 0 ? "+" : "";
+                        let cumplimientoText = `${sign}${horas}h ${minutos}m`;
+                        let color = diferencia > 0 ? "green" : diferencia < 0 ? "red" : "green";
+                        fila.cells[4].innerHTML = `<strong style="color: ${color};">${cumplimientoText}</strong>`;
+                    }
+                    break;
+                }
+            }
+
+            tablaContainer.style.display = 'block';
+            document.getElementById("totalCumplimientoContainer").style.display = 'block';
+            enviarReporteBtn.style.display = 'inline-block';
+            opcionesBtn.style.display = 'inline-block';
+            guardarDatos();
+            actualizarTotalCumplimiento();
+        }
+
+        function actualizarTotalCumplimiento() {
+            let totalHoras = 0;
+            let totalMinutos = 0;
+            const tabla = document.getElementById("tablaBody");
+            for (let fila of tabla.rows) {
+                if (fila.cells[4].textContent !== "-" && fila.cells[4].textContent !== "") {
+                    const cumplimiento = fila.cells[4].textContent;
+                    const [horas, minutos] = cumplimiento.replace(/[^0-9\-]+/g, ' ').trim().split(" ").map(Number);
+
+                    if (!isNaN(horas) && !isNaN(minutos)) {
+                        totalHoras += horas;
+                        totalMinutos += minutos;
+                    }
+                }
+            }
+
+            totalHoras += Math.floor(totalMinutos / 60);
+            totalMinutos %= 60;
+
+            const sign = totalHoras >= 0 ? "+" : "";
+            const totalCumplimientoElement = document.getElementById("totalCumplimiento");
+            totalCumplimientoElement.textContent = `Total: ${sign}${totalHoras}h ${totalMinutos}m`;
+        }
+
+        document.getElementById("nombreSelect").addEventListener("change", cargarDatos);
+
+        function eliminarDatosIndividual() {
+            const nombre = document.getElementById("nombreSelect").value;
+            if (!nombre) return alert("Selecciona un nombre");
+
+            const password = prompt("Ingrese la contraseña para eliminar los datos de " + nombre + ":");
+            if (password === "denani2025") {
+                if (confirm("¿Estás seguro de que quieres eliminar los datos de " + nombre + "?")) {
+                    localStorage.removeItem("horario_" + nombre);
+                    alert("Datos de " + nombre + " eliminados.");
+                    cargarDatos(); // Recargar la tabla para reflejar los cambios
+                }
+            } else {
+                alert("Contraseña incorrecta.");
+            }
+        }
+
+        function eliminarDatosGlobal() {
+            const password = prompt("Ingrese la contraseña para eliminar TODOS los datos:");
+            if (password === "denani2025") {
+                if (confirm("¿Estás seguro de que quieres eliminar TODOS los datos?")) {
+                    localStorage.clear();
+                    alert("Todos los datos han sido eliminados.");
+                    cargarDatos(); // Recargar la tabla para reflejar los cambios
+                }
+            } else {
+                alert("Contraseña incorrecta.");
+            }
+        }
+
+        function toggleOpciones() {
+            const opcionesTooltip = document.getElementById("opcionesTooltip");
+            opcionesTooltip.style.display = opcionesTooltip.style.display === "block" ? "none" : "block";
+        }
+
+        window.onload = () => {
+            if (document.getElementById("nombreSelect").value) {
+                cargarDatos();
+            }
+        };
+
+        function enviarCorreoConHorarios() {
+            const enviarReporteBtn = document.getElementById("enviarReporteBtn");
+            const loader = document.getElementById("loader");
+
+            enviarReporteBtn.style.display = "none";
+            loader.style.display = "inline-block";
+            let horariosData = {};
+            const nombres = ["Daniela", "Renzo", "Maria Elena", "Elizabeth", "Gavo", "Luzmila", "Alejandra"];
+            for (const nombre of nombres) {
+                horariosData[nombre] = obtenerHorarioParaNombre(nombre);
+            }
+
+            // Create form data
+            let formData = new FormData();
+            let reporte = "";
+            for (const nombre in horariosData) {
+                const horario = horariosData[nombre];
+                if (horario) {
+                    reporte += `Nombre: ${nombre}\n`;
+                    reporte += `Fecha: ${horario.fecha}\n`;
+                    reporte += `Entrada: ${horario.entrada}\n`;
+                    reporte += `Salida: ${horario.salida}\n`;
+                    reporte += `Cumplimiento: ${horario.cumplimiento.replace(/<[^>]*>/g, '')}\n\n`;
+                } else {
+                    reporte += `Nombre: ${nombre}\n`;
+                    reporte += "No se ha registrado el horario\n\n";
+                }
+            }
+            formData.append("horarios", reporte);
+
+            // Submit the form
+            fetch("https://formspree.io/f/mdkepnvl", {
+                method: "POST",
+                body: formData,
+                headers: {
+                    "Accept": "application/json"
+                }
+            }).then(response => {
+                if (response.ok) {
+                    alert("Reporte enviado correctamente!");
+                } else {
+                    alert("Error al enviar el reporte.");
+                }
+            }).finally(() => {
+                enviarReporteBtn.style.display = "inline-block";
+                loader.style.display = "none";
+            });
+        }
+
+        function obtenerHorarioParaNombre(nombre) {
+            let datos = localStorage.getItem("horario_" + nombre);
+            if (datos) {
+                let arreglo = JSON.parse(datos);
+                let hoy = new Date();
+                let diaNombre = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"][hoy.getDay()];
+
+                for (let i = 0; i < arreglo.length; i++) {
+                    let fila = arreglo[i];
+                    if (fila && fila[0] === hoy.toLocaleDateString()) {
+                        return {
+                            fecha: fila[0],
+                            entrada: fila[1],
+                            salida: fila[2],
+                            cumplimiento: fila[3]
+                        };
+                    }
+                }
+            }
+            return null;
+        }
+
+
+        function guardarDatos() {
+            const nombre = document.getElementById("nombreSelect").value;
+            if (!nombre) return;  // No guardes si no hay un nombre seleccionado
+
+            const datos = [];
+            for (let fila of document.querySelectorAll("#tablaBody tr")) {
+                datos.push([
+                    fila.cells[1].textContent, // Fecha
+                    fila.cells[2].textContent, // Entrada
+                    fila.cells[3].textContent, // Salida
+                    fila.cells[4].innerHTML    // Cumplimiento
+                ]);
+        }
+
+        localStorage.setItem("horario_" + nombre, JSON.stringify(datos));
+    }
+
+    function cargarDatos() {
+        const nombre = document.getElementById("nombreSelect").value;
+        if (!nombre) return;  // No cargar datos si no hay nombre seleccionado
+
+        const datos = localStorage.getItem("horario_" + nombre);
+        const tablaContainer = document.getElementById("tablaContainer");
+        const enviarReporteBtn = document.getElementById("enviarReporteBtn");
+        const eliminarIndividualBtn = document.getElementById("eliminarIndividualBtn");
+        const eliminarGlobalBtn = document.getElementById("eliminarGlobalBtn");
+        const opcionesBtn = document.getElementById("opcionesBtn");
+
+        if (datos) {
+            let arreglo = JSON.parse(datos);
+            let filas = document.querySelectorAll("#tablaBody tr");
+            arreglo.forEach((valores, i) => {
+                if (filas[i]) {
+                    if (filas[i].cells[1]) {
+                        filas[i].cells[1].textContent = valores[0];
+                    }
+                    if (filas[i].cells[2]) {
+                        filas[i].cells[2].textContent = valores[1];
+                    }
+                    if (filas[i].cells[3]) {
+                        filas[i].cells[3].textContent = valores[2];
+                    }
+                    if (filas[i].cells[4]) {
+                        filas[i].cells[4].innerHTML = valores[3];
+                    }
+                }
+            });
+            tablaContainer.style.display = 'block';  // Mostrar la tabla cuando haya datos
+            enviarReporteBtn.style.display = 'inline-block';
+            opcionesBtn.style.display = 'inline-block';
+        } else {
+            // Si no hay datos en localStorage, restablecer la tabla
+            for (let fila of document.querySelectorAll("#tablaBody tr")) {
+                for (let i = 1; i < 5; i++) fila.cells[i].textContent = "-";
+            }
+            tablaContainer.style.display = 'block';
+            document.getElementById("totalCumplimientoContainer").style.display = 'none';  // Ocultar la tabla si no hay datos
+            enviarReporteBtn.style.display = 'none';
+            opcionesBtn.style.display = 'none';
+            document.getElementById("eliminarIndividualBtn").style.display = 'none';
+            document.getElementById("eliminarGlobalBtn").style.display = 'none';
+        }
+    }
+    </script>
+
+</body>
+
+</html>
