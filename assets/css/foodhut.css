@@ -7086,7 +7086,7 @@ a.close.disabled {
   line-break: auto;
   font-size: 0.875rem;
   word-wrap: break-word;
-  background: darkgray;
+  background: white;
   padding: 6px;
   border-radius: 6px;
 }
@@ -7097,7 +7097,7 @@ a.close.disabled {
   height: 15px;
   width: 15px;
   left: -8px;
-  background: darkgray;
+  background: white;
   transform: rotate(45deg);
   z-index: -1;
   top: calc(50% - 7.5px);

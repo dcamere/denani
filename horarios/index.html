@@ -46,8 +46,8 @@
         </div>
     </nav>
     <!-- header -->
-    <header id="home" class="header">
-        <div class="overlay text-white text-center pt-6">
+    <header id="home" class="header" style="padding-top: 70px">
+        <div class="overlay text-white text-center">
             <h1 class="display-2 font-weight-bold my-3">Horarios</h1>
 
             <!-- Select de nombres -->
@@ -72,7 +72,7 @@
             </div>
 
             <!-- Tabla de horarios -->
-            <div class="table-responsive my-4" id="tablaContainer">
+            <div class="table-responsive my-4" id="tablaContainer" style="min-height: 400px; overflow-y: auto;">
                 <table class="table table-bordered table-dark text-white">
                     <thead>
                         <tr>
@@ -214,7 +214,7 @@
 
                     // Verifica si la tabla está visible y si tanto la entrada como la salida están marcadas
                     if (["Daniela", "Renzo"].includes(nombre)) {
-                        fila.cells[4].textContent = "-";
+                        fila.cells[4].textContent = "X";
                     } else if (tablaContainer.style.display === 'block' && fila.cells[2].textContent !== "-" && fila.cells[3].textContent !== "-") {
                         const entrada = fila.cells[2].textContent;
                         const salida = fila.cells[3].textContent;
